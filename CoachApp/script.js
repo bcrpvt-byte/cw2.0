@@ -41,6 +41,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentAthlete = { id: 'a-1', name: 'Lukas Müller', email: 'lukas.mueller@example.com' };
     let allProducts = [];
 
+    // --- Global State & Shared Mock Data ---
+    let allAthletesData = [];
+    let athletesLoaded = false;
+    const mockCheckins = [
+        { id: 'CI-001', date: '2023-10-25', athleteName: 'Max Mustermann', status: 'Pending', answers: { weight: '80kg', energy: 'Good', notes: 'Felt great during workouts.' } },
+        { id: 'CI-002', date: '2023-10-24', athleteName: 'Anna Schmidt', status: 'Reviewed', answers: { weight: '65kg', energy: 'Low', notes: 'Slept badly this week.' } }
+    ];
+    const mockInvoices = [
+        { id: 'INV-2023-001', customer: 'Anna Müller', date: '01.10.2023', amount: '199,00 €', status: 'paid' },
+        { id: 'INV-2023-002', customer: 'Lukas Schmidt', date: '05.10.2023', amount: '85,00 €', status: 'pending' },
+        { id: 'INV-2023-003', customer: 'Sarah Weber', date: '12.10.2023', amount: '49,00 €', status: 'paid' },
+        { id: 'INV-2023-004', customer: 'Max Mustermann', date: '15.09.2023', amount: '250,00 €', status: 'overdue' }
+    ];
+
     // --- Backend Communication Helpers ---
     const runBackend = (fnName, ...args) => {
         return new Promise((resolve, reject) => {
@@ -62,15 +76,31 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Initialize Data
-    async function initData() {
+    async function initAllModules() {
+        console.log('Initializing all modules...');
         try {
-            const athletes = await runBackend('api_getAthletes');
-            console.log('Athletes loaded:', athletes);
+            // Initial Data Fetch
+            const [athletes, products] = await Promise.all([
+                runBackend('api_getAthletes'),
+                runBackend('api_getProducts')
+            ]);
             
-            allProducts = await runBackend('api_getProducts');
+            allAthletesData = athletes || [];
+            allProducts = products || [];
+            
+            // Standard Initializations
             renderProducts(allProducts);
+            renderDashboard(); // Initial view is Dashboard
+            
+            // Background loading for other modules
+            renderAthletes(allAthletesData);
+            renderCheckins();
+            renderInvoices(mockInvoices);
+            
+            athletesLoaded = true;
+            console.log('All modules initialized successfully');
         } catch (err) {
-            console.error('Failed to init data:', err);
+            console.error('Failed to init modules:', err);
         }
     }
 
@@ -159,11 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
-    initData();
+    // Initial load
+    initAllModules();
+    navigateTo('dashboard');
 
     // --- SPA Navigation Logic ---
     function navigateTo(viewId) {
+        console.log(`Navigating to: ${viewId}`);
         views.forEach(v => v.classList.remove('active'));
         navItems.forEach(n => n.classList.remove('active'));
 
@@ -177,20 +209,31 @@ document.addEventListener('DOMContentLoaded', () => {
             targetNavItem.classList.add('active');
         }
 
+        // --- Module-Specific Rendering (Update content if needed) ---
+        if (viewId === 'dashboard') {
+            renderDashboard();
+        } else if (viewId === 'athletes') {
+            loadAthletesData();
+        } else if (viewId === 'checkins') {
+            renderCheckins();
+        } else if (viewId === 'invoices') {
+            renderInvoices(mockInvoices);
+        }
+
         // Special handling for legacy views that are now modals or sections
         if (viewId === 'products') {
-            // Option 1: Open existing products modal
             productsModal.classList.remove('hidden');
-            // Option 2: Redirect back to dashboard active item to avoid 'empty' view
-            // (We'll keep it as a view placeholder for now)
         }
     }
 
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const viewId = item.getAttribute('data-view');
+    // SPA Navigation with delegation for dynamic content (e.g. Dashboard buttons)
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('[data-view]');
+        if (link) {
+            e.preventDefault();
+            const viewId = link.getAttribute('data-view');
             navigateTo(viewId);
-        });
+        }
     });
 
     // Handle initial Products button from before
@@ -331,11 +374,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Call this whenever products are loaded
-    const originalInitData = initData;
-    window.initData = async () => {
-        await originalInitData();
+    async function nukeAndRebuildProducts() {
+        await initAllModules();
         renderCallsSpektrum();
-    };
+    }
+    window.initData = nukeAndRebuildProducts;
 
     const triggerAthleteApp = document.getElementById('triggerAthleteApp');
     const athleteAppCodeArea = document.getElementById('athleteAppCodeArea');
@@ -548,16 +591,12 @@ document.addEventListener('DOMContentLoaded', () => {
         seconds = 0;
         timerDisplay.textContent = '00:00';
     }
-});
-
-/* ==========================================
-   AGENT WORKING ZONES (JS)
-   Each agent works ONLY within their assigned section below.
-   DO NOT modify logic outside of your assigned section.
-   Use the existing 'runBackend' function for backend calls.
-   ========================================== */
-
-// \[AGENT-1: DASHBOARD - START\]
+    /* ==========================================
+       AGENT WORKING ZONES (JS)
+       Each agent works ONLY within their assigned section below.
+       DO NOT modify logic outside of your assigned section.
+       Use the existing 'runBackend' function for backend calls.
+       ========================================== */
 // Dashboard initialization and event listeners
 
 const dashboardContext = {
@@ -571,7 +610,7 @@ const athleteData = [
     { id: 'a-3', name: 'Tom Bauer', type: 'Review Call', time: '19:30', tag: 'CALL', tagClass: 'tag-call' }
 ];
 
-document.addEventListener('DOMContentLoaded', () => {
+function renderDashboard() {
     // 1. Upgrade Welcome Banner securely
     const welcomeTitle = document.getElementById('welcome-title');
     const welcomeSubtitle = document.getElementById('welcome-subtitle');
@@ -634,18 +673,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Connect "Start Next Call" button securely
     if (openModalBtn && athleteData.length > 0) {
-        openModalBtn.addEventListener('click', (e) => {
-            // If the user clicks the button directly without clicking a specific todo item,
-            // we default to the first athlete in the list
+        // Remove old listeners to avoid multiple attachments on re-render
+        const newBtn = openModalBtn.cloneNode(true);
+        openModalBtn.parentNode.replaceChild(newBtn, openModalBtn);
+        
+        newBtn.addEventListener('click', (e) => {
             const athleteNameEl = document.getElementById('athleteName');
-            // Check if it's currently showing default or empty, or just always set it to the next call if this button is clicked
-            if (athleteNameEl && e.isTrusted) { // e.isTrusted is true if user clicked directly, false if triggered programmatically
+            if (athleteNameEl && e.isTrusted) { 
                  athleteNameEl.textContent = athleteData[0].name;
                  currentAthlete = { id: athleteData[0].id, name: athleteData[0].name, email: athleteData[0].name.toLowerCase().split(' ')[0] + '@example.com' };
             }
         });
     }
-});
+}
+
 // [AGENT-1: DASHBOARD - END]
 
 // [AGENT-2: ATHLETES - START]
@@ -661,8 +702,7 @@ const athleteDetailEmail = document.getElementById('athleteDetailEmail');
 const athleteDetailSport = document.getElementById('athleteDetailSport');
 const startCallFromAthleteBtn = document.getElementById('startCallFromAthleteBtn');
 
-let allAthletesData = [];
-let athletesLoaded = false;
+
 
 // Function to render athlete cards using DOM API (No innerHTML)
 function renderAthletes(athletes) {
@@ -731,21 +771,7 @@ async function loadAthletesData() {
     }
 }
 
-// Load athletes when the view is activated
-const navItemsForAthletes = document.querySelectorAll('.nav-item[data-view="athletes"]');
-navItemsForAthletes.forEach(item => {
-    item.addEventListener('click', () => {
-        loadAthletesData();
-    });
-});
-
-// Also trigger if it's the initial active view (though normally it's dashboard)
-if (document.querySelector('.nav-item.active[data-view="athletes"]')) {
-    loadAthletesData();
-}
-
-
-// Search Functionality
+// [AGENT-2: ATHLETES - END]
 if (athleteSearchInput) {
     athleteSearchInput.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase();
@@ -816,10 +842,7 @@ if (athleteDetailModal) {
 // [AGENT-3: CHECK-INS - START]
 // Check-In rendering and review submission logic
 
-const mockCheckins = [
-    { id: 'CI-001', date: '2023-10-25', athleteName: 'Max Mustermann', status: 'Pending', answers: { weight: '80kg', energy: 'Good', notes: 'Felt great during workouts.' } },
-    { id: 'CI-002', date: '2023-10-24', athleteName: 'Anna Schmidt', status: 'Reviewed', answers: { weight: '65kg', energy: 'Low', notes: 'Slept badly this week.' } }
-];
+
 
 function renderCheckins() {
     const tbody = document.getElementById('checkins-list-body');
@@ -900,8 +923,8 @@ function openCheckinReview(checkin) {
     modal.classList.remove('hidden');
 }
 
-// Add event listener to view switch to load checkins
-document.addEventListener('DOMContentLoaded', () => {
+// Register Check-In Events once helper
+function initCheckinEvents() {
     // Setup modal close
     const closeBtn = document.getElementById('closeCheckinModal');
     if (closeBtn) {
@@ -931,7 +954,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const checkin = mockCheckins.find(c => c.id === id);
             if (checkin) {
                 checkin.status = 'Reviewed';
-                // In a real app, send feedback to backend here
             }
 
             // Close modal and re-render
@@ -940,89 +962,73 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Check-In marked as reviewed!');
         });
     }
+}
 
-    // Override nav button logic specifically for checkins to ensure rendering
-    const checkinsNavBtn = document.querySelector('.nav-item[data-view="checkins"]');
-    if (checkinsNavBtn) {
-        checkinsNavBtn.addEventListener('click', () => {
-            renderCheckins();
-        });
-    }
-});
 // [AGENT-3: CHECK-INS - END]
 
 // [AGENT-4: INVOICES - START]
 // Invoice list rendering and management logic
-document.addEventListener('DOMContentLoaded', () => {
-    const mockInvoices = [
-        { id: 'INV-2023-001', customer: 'Anna Müller', date: '01.10.2023', amount: '199,00 €', status: 'paid' },
-        { id: 'INV-2023-002', customer: 'Lukas Schmidt', date: '05.10.2023', amount: '85,00 €', status: 'pending' },
-        { id: 'INV-2023-003', customer: 'Sarah Weber', date: '12.10.2023', amount: '49,00 €', status: 'paid' },
-        { id: 'INV-2023-004', customer: 'Max Mustermann', date: '15.09.2023', amount: '250,00 €', status: 'overdue' }
-    ];
+function renderInvoices(invoices) {
+    const tableBody = document.getElementById('invoicesTableBody');
+    if (!tableBody) return;
 
-    function renderInvoices(invoices) {
-        const tableBody = document.getElementById('invoicesTableBody');
-        if (!tableBody) return;
+    tableBody.textContent = ''; // Clear existing content
 
-        tableBody.textContent = ''; // Clear existing content
+    invoices.forEach(inv => {
+        const tr = document.createElement('tr');
 
-        invoices.forEach(inv => {
-            const tr = document.createElement('tr');
+        // ID
+        const tdId = document.createElement('td');
+        tdId.textContent = inv.id;
+        tr.appendChild(tdId);
 
-            // ID
-            const tdId = document.createElement('td');
-            tdId.textContent = inv.id;
-            tr.appendChild(tdId);
+        // Customer
+        const tdCustomer = document.createElement('td');
+        tdCustomer.textContent = inv.customer;
+        tr.appendChild(tdCustomer);
 
-            // Customer
-            const tdCustomer = document.createElement('td');
-            tdCustomer.textContent = inv.customer;
-            tr.appendChild(tdCustomer);
+        // Date
+        const tdDate = document.createElement('td');
+        tdDate.textContent = inv.date;
+        tr.appendChild(tdDate);
 
-            // Date
-            const tdDate = document.createElement('td');
-            tdDate.textContent = inv.date;
-            tr.appendChild(tdDate);
+        // Amount
+        const tdAmount = document.createElement('td');
+        tdAmount.textContent = inv.amount;
+        tr.appendChild(tdAmount);
 
-            // Amount
-            const tdAmount = document.createElement('td');
-            tdAmount.textContent = inv.amount;
-            tr.appendChild(tdAmount);
+        // Status
+        const tdStatus = document.createElement('td');
+        const statusSpan = document.createElement('span');
+        statusSpan.classList.add('status-badge');
+        statusSpan.classList.add(inv.status);
 
-            // Status
-            const tdStatus = document.createElement('td');
-            const statusSpan = document.createElement('span');
-            statusSpan.classList.add('status-badge');
-            statusSpan.classList.add(inv.status);
+        if (inv.status === 'paid') {
+            statusSpan.textContent = 'Bezahlt';
+        } else if (inv.status === 'pending') {
+            statusSpan.textContent = 'Offen';
+        } else if (inv.status === 'overdue') {
+            statusSpan.textContent = 'Überfällig';
+        } else {
+            statusSpan.textContent = inv.status;
+        }
+        tdStatus.appendChild(statusSpan);
+        tr.appendChild(tdStatus);
 
-            if (inv.status === 'paid') {
-                statusSpan.textContent = 'Bezahlt';
-            } else if (inv.status === 'pending') {
-                statusSpan.textContent = 'Offen';
-            } else if (inv.status === 'overdue') {
-                statusSpan.textContent = 'Überfällig';
-            } else {
-                statusSpan.textContent = inv.status;
-            }
-            tdStatus.appendChild(statusSpan);
-            tr.appendChild(tdStatus);
+        // Actions
+        const tdActions = document.createElement('td');
+        tdActions.classList.add('actions-cell');
+        const actionBtn = document.createElement('button');
+        actionBtn.classList.add('btn', 'btn-secondary', 'sm');
+        actionBtn.textContent = 'Details';
+        tdActions.appendChild(actionBtn);
+        tr.appendChild(tdActions);
 
-            // Actions
-            const tdActions = document.createElement('td');
-            tdActions.classList.add('actions-cell');
-            const actionBtn = document.createElement('button');
-            actionBtn.classList.add('btn', 'btn-secondary', 'sm');
-            actionBtn.textContent = 'Details';
-            tdActions.appendChild(actionBtn);
-            tr.appendChild(tdActions);
+        tableBody.appendChild(tr);
+    });
+}
 
-            tableBody.appendChild(tr);
-        });
-    }
-
-    // Initial render
-    renderInvoices(mockInvoices);
-});
 // [AGENT-4: INVOICES - END]
+
+});
 

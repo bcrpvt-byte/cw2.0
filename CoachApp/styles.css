@@ -29,6 +29,12 @@
     --orange: #f59e0b;
     --purple: #8b5cf6;
     --slate: #475569;
+    /* Compatibility for Agents */
+    --primary-color: var(--blue-vibrant);
+    --surface-light: var(--bg-card);
+    --border-color: var(--border-subtle);
+    --primary-light: rgba(59, 130, 246, 0.1);
+    --surface-hover: var(--bg-card-hover);
 }
 
 * {
