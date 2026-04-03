@@ -109,12 +109,43 @@
                 <section id="view-athletes" class="content-view">
                     <header class="view-header">
                         <h1>Meine Athleten</h1>
-                        <button class="btn btn-primary">+ Neuer Athlet</button>
+                        <button class="btn btn-primary" id="newAthleteBtn">+ Neuer Athlet</button>
                     </header>
-                    <div class="card content-placeholder">
-                        <p>Athleten-Verzeichnis wird geladen...</p>
+                    <div class="card">
+                        <div class="athlete-search-bar">
+                            <input type="text" id="athleteSearchInput" placeholder="Athleten suchen..." class="form-control">
+                        </div>
+                        <div id="athleteList" class="athlete-list">
+                            <!-- Athlete cards will be injected here via DOM API -->
+                            <p id="athleteLoadingMsg">Athleten-Verzeichnis wird geladen...</p>
+                        </div>
                     </div>
                 </section>
+
+                <!-- Athlete Detail Modal -->
+                <div id="athleteDetailModal" class="modal-overlay hidden">
+                    <div class="modal-container dark-theme">
+                        <header class="modal-header">
+                            <h2 id="athleteDetailName">Athlet Details</h2>
+                            <button id="closeAthleteDetailBtn" class="icon-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </button>
+                        </header>
+                        <main class="modal-main" style="padding: 1.5rem;">
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <p id="athleteDetailEmail" style="color: var(--text-color); margin-top: 0.25rem;">-</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Sportart:</label>
+                                <p id="athleteDetailSport" style="color: var(--text-color); margin-top: 0.25rem;">-</p>
+                            </div>
+                            <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                                <button class="btn btn-primary" id="startCallFromAthleteBtn">Call starten</button>
+                            </div>
+                        </main>
+                    </div>
+                </div>
                 <!-- [AGENT-2: ATHLETES - END] -->
 
                 <!-- [AGENT-3: CHECKINS - START] -->

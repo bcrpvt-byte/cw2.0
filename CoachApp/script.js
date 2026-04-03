@@ -650,6 +650,167 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // [AGENT-2: ATHLETES - START]
 // Athlete View logic, search, and detail modal triggers
+const athleteSearchInput = document.getElementById('athleteSearchInput');
+const athleteList = document.getElementById('athleteList');
+const athleteLoadingMsg = document.getElementById('athleteLoadingMsg');
+
+const athleteDetailModal = document.getElementById('athleteDetailModal');
+const closeAthleteDetailBtn = document.getElementById('closeAthleteDetailBtn');
+const athleteDetailName = document.getElementById('athleteDetailName');
+const athleteDetailEmail = document.getElementById('athleteDetailEmail');
+const athleteDetailSport = document.getElementById('athleteDetailSport');
+const startCallFromAthleteBtn = document.getElementById('startCallFromAthleteBtn');
+
+let allAthletesData = [];
+let athletesLoaded = false;
+
+// Function to render athlete cards using DOM API (No innerHTML)
+function renderAthletes(athletes) {
+    if (!athleteList) return;
+
+    // Clear the list first (while keeping the loading message if needed, or just clear all)
+    while (athleteList.firstChild) {
+        athleteList.removeChild(athleteList.firstChild);
+    }
+
+    if (athletes.length === 0) {
+        const emptyMsg = document.createElement('p');
+        emptyMsg.textContent = 'Keine Athleten gefunden.';
+        athleteList.appendChild(emptyMsg);
+        return;
+    }
+
+    athletes.forEach(athlete => {
+        const card = document.createElement('div');
+        card.className = 'athlete-card';
+        card.dataset.athleteId = athlete.id;
+
+        const avatar = document.createElement('div');
+        avatar.className = 'athlete-card-avatar';
+        // Basic initial extraction
+        avatar.textContent = athlete.name ? athlete.name.charAt(0).toUpperCase() : 'A';
+
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'athlete-card-info';
+
+        const nameEl = document.createElement('h3');
+        nameEl.textContent = athlete.name || 'Unbekannter Athlet';
+
+        const emailEl = document.createElement('p');
+        emailEl.textContent = athlete.email || 'Keine Email';
+
+        infoDiv.appendChild(nameEl);
+        infoDiv.appendChild(emailEl);
+
+        card.appendChild(avatar);
+        card.appendChild(infoDiv);
+
+        // Add click event for modal
+        card.addEventListener('click', () => {
+            openAthleteDetailModal(athlete);
+        });
+
+        athleteList.appendChild(card);
+    });
+}
+
+// Function to fetch athletes
+async function loadAthletesData() {
+    if (athletesLoaded) return;
+
+    try {
+        const athletes = await runBackend('api_getAthletes');
+        allAthletesData = athletes || [];
+        renderAthletes(allAthletesData);
+        athletesLoaded = true;
+    } catch (err) {
+        console.error('Failed to load athletes:', err);
+        if (athleteLoadingMsg) {
+            athleteLoadingMsg.textContent = 'Fehler beim Laden der Athleten.';
+        }
+    }
+}
+
+// Load athletes when the view is activated
+const navItemsForAthletes = document.querySelectorAll('.nav-item[data-view="athletes"]');
+navItemsForAthletes.forEach(item => {
+    item.addEventListener('click', () => {
+        loadAthletesData();
+    });
+});
+
+// Also trigger if it's the initial active view (though normally it's dashboard)
+if (document.querySelector('.nav-item.active[data-view="athletes"]')) {
+    loadAthletesData();
+}
+
+
+// Search Functionality
+if (athleteSearchInput) {
+    athleteSearchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+
+        // Option 1: Filter the DOM elements directly
+        const cards = athleteList.querySelectorAll('.athlete-card');
+        cards.forEach(card => {
+            const nameEl = card.querySelector('h3');
+            const emailEl = card.querySelector('p');
+
+            const name = nameEl ? nameEl.textContent.toLowerCase() : '';
+            const email = emailEl ? emailEl.textContent.toLowerCase() : '';
+
+            if (name.includes(query) || email.includes(query)) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+    });
+}
+
+
+// Modal Interaction Logic
+function openAthleteDetailModal(athlete) {
+    if (!athleteDetailModal) return;
+
+    // Populate details using safe DOM properties
+    if (athleteDetailName) athleteDetailName.textContent = athlete.name || 'Unbekannt';
+    if (athleteDetailEmail) athleteDetailEmail.textContent = athlete.email || 'Keine Email';
+    if (athleteDetailSport) athleteDetailSport.textContent = athlete.sport || 'Nicht angegeben';
+
+    // Set up Call action logic
+    if (startCallFromAthleteBtn) {
+        // Clear old listeners by cloning (simple way) or updating onclick
+        startCallFromAthleteBtn.onclick = () => {
+            // Update global state and open calls modal
+            currentAthlete = athlete;
+            athleteDetailModal.classList.add('hidden');
+
+            // Re-use existing call modal logic
+            if (typeof callsModal !== 'undefined' && callsModal) {
+                callsModal.classList.remove('hidden');
+            }
+        };
+    }
+
+    athleteDetailModal.classList.remove('hidden');
+}
+
+if (closeAthleteDetailBtn) {
+    closeAthleteDetailBtn.addEventListener('click', () => {
+        athleteDetailModal.classList.add('hidden');
+    });
+}
+
+// Close on overlay click
+if (athleteDetailModal) {
+    athleteDetailModal.addEventListener('click', (e) => {
+        if (e.target === athleteDetailModal) {
+            athleteDetailModal.classList.add('hidden');
+        }
+    });
+}
+
 // [AGENT-2: ATHLETES - END]
 
 // [AGENT-3: CHECK-INS - START]
