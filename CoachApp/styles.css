@@ -1492,3 +1492,62 @@ body {
 /* [AGENT-4: INVOICES - START] */
 /* Add Invoices View specific styling here */
 /* [AGENT-4: INVOICES - END] */
+
+/* --- [AGENT-2: ATHLETES - CSS START] --- */
+.athlete-search-bar {
+    margin-bottom: 1.5rem;
+}
+
+.athlete-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.athlete-card {
+    background-color: var(--surface-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.athlete-card:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.athlete-card.hidden {
+    display: none;
+}
+
+.athlete-card-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.athlete-card-info h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.athlete-card-info p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+/* --- [AGENT-2: ATHLETES - CSS END] --- */
