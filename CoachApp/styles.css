@@ -1490,5 +1490,70 @@ body {
 /* [AGENT-3: CHECK-INS - END] */
 
 /* [AGENT-4: INVOICES - START] */
-/* Add Invoices View specific styling here */
+.invoice-summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-card-inv {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-main);
+}
+
+.summary-card-inv h3 {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.summary-card-inv .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.text-orange { color: var(--orange) !important; }
+.text-red { color: #ef4444 !important; }
+.text-green { color: var(--accent) !important; }
+
+.status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.status-badge.paid {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-badge.pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--orange);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.status-badge.overdue {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.invoice-table th, .invoice-table td {
+    white-space: nowrap;
+}
+
+.invoice-table .actions-cell {
+    text-align: right;
+}
 /* [AGENT-4: INVOICES - END] */

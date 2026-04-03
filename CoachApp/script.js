@@ -571,5 +571,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // [AGENT-4: INVOICES - START]
 // Invoice list rendering and management logic
+document.addEventListener('DOMContentLoaded', () => {
+    const mockInvoices = [
+        { id: 'INV-2023-001', customer: 'Anna Müller', date: '01.10.2023', amount: '199,00 €', status: 'paid' },
+        { id: 'INV-2023-002', customer: 'Lukas Schmidt', date: '05.10.2023', amount: '85,00 €', status: 'pending' },
+        { id: 'INV-2023-003', customer: 'Sarah Weber', date: '12.10.2023', amount: '49,00 €', status: 'paid' },
+        { id: 'INV-2023-004', customer: 'Max Mustermann', date: '15.09.2023', amount: '250,00 €', status: 'overdue' }
+    ];
+
+    function renderInvoices(invoices) {
+        const tableBody = document.getElementById('invoicesTableBody');
+        if (!tableBody) return;
+
+        tableBody.textContent = ''; // Clear existing content
+
+        invoices.forEach(inv => {
+            const tr = document.createElement('tr');
+
+            // ID
+            const tdId = document.createElement('td');
+            tdId.textContent = inv.id;
+            tr.appendChild(tdId);
+
+            // Customer
+            const tdCustomer = document.createElement('td');
+            tdCustomer.textContent = inv.customer;
+            tr.appendChild(tdCustomer);
+
+            // Date
+            const tdDate = document.createElement('td');
+            tdDate.textContent = inv.date;
+            tr.appendChild(tdDate);
+
+            // Amount
+            const tdAmount = document.createElement('td');
+            tdAmount.textContent = inv.amount;
+            tr.appendChild(tdAmount);
+
+            // Status
+            const tdStatus = document.createElement('td');
+            const statusSpan = document.createElement('span');
+            statusSpan.classList.add('status-badge');
+            statusSpan.classList.add(inv.status);
+
+            if (inv.status === 'paid') {
+                statusSpan.textContent = 'Bezahlt';
+            } else if (inv.status === 'pending') {
+                statusSpan.textContent = 'Offen';
+            } else if (inv.status === 'overdue') {
+                statusSpan.textContent = 'Überfällig';
+            } else {
+                statusSpan.textContent = inv.status;
+            }
+            tdStatus.appendChild(statusSpan);
+            tr.appendChild(tdStatus);
+
+            // Actions
+            const tdActions = document.createElement('td');
+            tdActions.classList.add('actions-cell');
+            const actionBtn = document.createElement('button');
+            actionBtn.classList.add('btn', 'btn-secondary', 'sm');
+            actionBtn.textContent = 'Details';
+            tdActions.appendChild(actionBtn);
+            tr.appendChild(tdActions);
+
+            tableBody.appendChild(tr);
+        });
+    }
+
+    // Initial render
+    renderInvoices(mockInvoices);
+});
 // [AGENT-4: INVOICES - END]
 
