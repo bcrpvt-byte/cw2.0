@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f9f9fc",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f0f0f3",
+                        "secondary-fixed-dim": "#b7c7eb",
+                        "on-background": "#1a1c1e",
+                        "surface-container-highest": "#e2e2e5",
+                        "inverse-surface": "#2f3133",
+                        "secondary-container": "#cadaff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#57fae9",
+                        "surface-dim": "#dadadc",
+                        "on-primary-fixed": "#001946",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f3f3f6",
+                        "tertiary-container": "#008379",
+                        "surface-variant": "#e2e2e5",
+                        "outline": "#717786",
+                        "primary-fixed": "#dae2ff",
+                        "tertiary-fixed-dim": "#2addcd",
+                        "surface": "#f9f9fc",
+                        "on-primary-fixed-variant": "#00419e",
+                        "surface-container": "#eeeef0",
+                        "on-secondary-container": "#505f7f",
+                        "background": "#f9f9fc",
+                        "on-secondary-fixed-variant": "#374765",
+                        "on-secondary-fixed": "#091b37",
+                        "surface-container-high": "#e8e8ea",
+                        "secondary": "#4f5e7e",
+                        "primary-container": "#206df1",
+                        "on-tertiary-fixed": "#00201d",
+                        "surface-tint": "#0057ce",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "on-surface-variant": "#414755",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#00685f",
+                        "on-tertiary-container": "#f4fffc",
+                        "outline-variant": "#c1c6d7",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#fefcff",
+                        "on-surface": "#1a1c1e",
+                        "inverse-primary": "#b1c5ff",
+                        "primary": "#0055c9"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-sidebar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-background antialiased flex min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen sticky left-0 top-0 w-64 glass-sidebar shadow-[0_20px_40px_rgba(26,28,30,0.06)] flex flex-col gap-2 p-4 z-50">
+<div class="mb-8 px-4 py-2">
+<span class="font-headline font-black text-2xl text-primary tracking-tight">CoachApp</span>
+<div class="mt-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden">
+<img alt="Coach Profile" data-alt="professional portrait of a high-performance athletic coach with a confident smile in a modern studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCYo4MzbfFWZnzDgJW7LlScntT6XQXsIbfrlAuXxYzYnoVPyiIhV5UwQYEvjIOj4DUZYdKdo_5ClDMIut4tNNqIj2eCkghINwmRfD87sjnP7-WeIDOGXU5PZhSHfOEWmKP6q9uWSD5TQtMC49DU1OyCwTdqel4nxhRv2-IBJ3PUg-KX5IZ28KXf4qzNcR0ez9EIAfMnTd59o6w3brRqnRXzO7STVAMk3UK4Bw9jfBB5vJYl-EeDlw9qXBI4ZNSWpAcvar7PQ8ZdW-x"/>
+</div>
+<div>
+<p class="text-sm font-bold font-headline leading-none">Coach Dashboard</p>
+<p class="text-[10px] text-secondary uppercase tracking-widest mt-1">Executive Precision</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-sm font-medium">Athletes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="text-sm font-medium">Check-ins</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined">call</span>
+<span class="text-sm font-medium">Calls</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm font-medium">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium">Contracts</span>
+</a>
+<!-- Active State: Invoices -->
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-fixed-dim text-primary rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="text-sm font-bold">Invoices</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 py-4">
+<div class="p-4 bg-surface-container-low rounded-xl">
+<p class="text-xs text-on-surface-variant font-medium mb-2">Storage Usage</p>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%]"></div>
+</div>
+<p class="text-[10px] text-secondary mt-2">6.5GB of 10GB used</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col min-w-0 bg-surface-container-low">
+<!-- TopNavBar (Shared Component Style) -->
+<header class="sticky top-0 z-40 bg-surface-bright flex justify-between items-center px-10 py-6 w-full">
+<div class="flex items-center gap-4">
+<h1 class="text-4xl font-headline font-black text-on-background tracking-tighter">Invoices</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="pl-10 pr-4 py-2.5 bg-surface-container-lowest border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search athletes or invoice ID..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-secondary hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-secondary hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+<button class="px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white font-bold rounded-lg text-sm shadow-lg shadow-primary/20 flex items-center gap-2 hover:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Create Invoice
+                </button>
+</div>
+</header>
+<div class="px-10 py-8 space-y-10">
+<!-- Dashboard Overview: Asymmetric Metric Cards -->
+<section class="grid grid-cols-12 gap-6">
+<div class="col-span-12 lg:col-span-5 p-8 bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between min-h-[180px]">
+<div>
+<p class="text-sm font-medium text-secondary uppercase tracking-widest">Annual Revenue</p>
+<h2 class="text-4xl font-headline font-bold mt-2">$142,500.00</h2>
+</div>
+<div class="flex items-center gap-2 text-tertiary font-bold text-sm mt-4">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                        +12% vs last year
+                    </div>
+</div>
+<div class="col-span-12 lg:col-span-4 p-8 bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<p class="text-sm font-medium text-secondary uppercase tracking-widest">Pending Invoices</p>
+<h2 class="text-4xl font-headline font-bold mt-2 text-on-surface">$8,420.00</h2>
+</div>
+<p class="text-xs text-on-surface-variant mt-4">Average collection time: 4.2 days</p>
+</div>
+<div class="col-span-12 lg:col-span-3 p-8 border border-outline-variant/15 rounded-xl flex flex-col justify-between">
+<div>
+<p class="text-sm font-medium text-secondary uppercase tracking-widest">Reliability</p>
+<h2 class="text-4xl font-headline font-bold mt-2">98%</h2>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[98%]"></div>
+</div>
+</div>
+</section>
+<!-- Invoices List Container -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div class="flex gap-2">
+<button class="px-5 py-2 bg-primary text-on-primary font-bold rounded-full text-xs">All</button>
+<button class="px-5 py-2 bg-surface-container text-secondary font-medium rounded-full text-xs hover:bg-surface-container-high transition-colors">Paid</button>
+<button class="px-5 py-2 bg-surface-container text-secondary font-medium rounded-full text-xs hover:bg-surface-container-high transition-colors">Pending</button>
+<button class="px-5 py-2 bg-surface-container text-secondary font-medium rounded-full text-xs hover:bg-surface-container-high transition-colors">Overdue</button>
+</div>
+<div class="flex items-center gap-4 text-xs text-secondary">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span>Sorted by Date (Newest)</span>
+</div>
+</div>
+<!-- Invoice Table (The No-Line Rule) -->
+<div class="overflow-x-auto">
+<table class="w-full border-separate border-spacing-y-4">
+<thead class="text-left text-xs font-medium text-secondary uppercase tracking-widest">
+<tr>
+<th class="px-4 pb-2">Invoice ID</th>
+<th class="px-4 pb-2">Athlete</th>
+<th class="px-4 pb-2">Issue Date</th>
+<th class="px-4 pb-2">Plan</th>
+<th class="px-4 pb-2">Amount</th>
+<th class="px-4 pb-2">Status</th>
+<th class="px-4 pb-2 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-low transition-colors rounded-xl">
+<td class="px-4 py-5 font-bold text-on-surface-variant first:rounded-l-xl">#INV-0892</td>
+<td class="px-4 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container overflow-hidden">
+<img alt="Athlete Avatar" data-alt="close-up portrait of a male athlete with athletic headband and focused expression during a morning workout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV4RcaOtv-ehJCkhZm9u-bqdB52_gEVhpwSJ7jamGv_fVwp0fBSDrqNfSxtcv9ItMItoKfmlsoSPUtRrKLFymjWQd4JeDif-agAGqdOCIv4gIbeLONwlTU4TnW0Chx882uY3NpcTMt5eb4uRkA7jJ-qQFV6X-7olaffObRerqPIcU79gfBTD5kyYE0ZDxgBOSE8-55aokyE9UnZklHnmuAeody6iuknuIGixzuk8ZIhdO25JJcfVaKOQIlPF-hboLGOaGq1thczHOd"/>
+</div>
+<span class="font-bold">Julianne Devis</span>
+</div>
+</td>
+<td class="px-4 py-5 text-secondary">Oct 12, 2024</td>
+<td class="px-4 py-5 text-on-surface-variant font-medium">Powerlifting Pro</td>
+<td class="px-4 py-5 font-headline font-bold text-base">$350.00</td>
+<td class="px-4 py-5">
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full text-xs font-bold">Paid</span>
+</td>
+<td class="px-4 py-5 text-right last:rounded-r-xl">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-secondary hover:text-primary transition-colors border border-outline-variant/15 rounded-lg">
+<span class="material-symbols-outlined text-sm">download</span>
+</button>
+<button class="p-2 text-secondary hover:text-primary transition-colors border border-outline-variant/15 rounded-lg">
+<span class="material-symbols-outlined text-sm">forward_to_inbox</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-low transition-colors rounded-xl">
+<td class="px-4 py-5 font-bold text-on-surface-variant first:rounded-l-xl">#INV-0891</td>
+<td class="px-4 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden">
+<img alt="Athlete Avatar" data-alt="portrait of a focused female track athlete with braided hair looking towards the horizon in golden hour lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzvp1-azaRSiN0mDimFYT3cqtRnpAj-DWymsIiYQs7Ef5pKa3BaFcFu5v0e_NXuche1FFNC-Y6A5ZmevVYja6ecL6fUYM1N3guaHR4zDLQrAd0Iy5kGDz6Zto5pexEpxQ7MAXHcMvHVUifXXWazvhIvrfwpuBbKunXQUhHQw3RvkXGvefXIlq0qpG7cLfTQJPT5-Wn3D30RfkdzQjmjphlToCRsRjZ5Fnn969U7BfHnt9l2Q4QKa2KkjJJCBkGyj1RApCq51UoYr6m"/>
+</div>
+<span class="font-bold">Marcus Kane</span>
+</div>
+</td>
+<td class="px-4 py-5 text-secondary">Oct 10, 2024</td>
+<td class="px-4 py-5 text-on-surface-variant font-medium">Monthly Elite</td>
+<td class="px-4 py-5 font-headline font-bold text-base">$120.00</td>
+<td class="px-4 py-5">
+<span class="px-3 py-1 bg-error/10 text-error rounded-full text-xs font-bold">Overdue</span>
+</td>
+<td class="px-4 py-5 text-right last:rounded-r-xl">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-secondary hover:text-primary transition-colors border border-outline-variant/15 rounded-lg">
+<span class="material-symbols-outlined text-sm">download</span>
+</button>
+<button class="p-2 text-secondary hover:text-primary transition-colors border border-outline-variant/15 rounded-lg">
+<span class="material-symbols-outlined text-sm">forward_to_inbox</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container-low transition-colors rounded-xl">
+<td class="px-4 py-5 font-bold text-on-surface-variant first:rounded-l-xl">#INV-0890</td>
+<td class="px-4 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="Athlete Avatar" data-alt="energetic portrait of a young male basketball player holding a ball with a vibrant urban basketball court in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7P_RCQkNmIkEO_eNVoBG-I_Uh6M8tdY4DJZHKOMT7G64EPnz2hPlZOIR6_-q_ufbf_sRU49huVSyM1DTCqfrw47Lr5rSb9jgU9rG-uCJYw3HEjj1RjIxW-Tc9xKh3xFNfLCQZvc6gIibkFyp-qRunHl5XcRb_SUWF3zIEoYC18ltbgip-TZ43zDms_8hFsRq7n0HwfLMXne8fUEFEYffJLm4pr_nXkQhm0sauLZGRVuQHM2bWLdMDkHTjOG3sa_j-IYmp-mcZsnlS"/>
+</div>
+<span class="font-bold">Sarah Linn</span>
+</div>
+</td>
+<td class="px-4 py-5 text-secondary">Oct 08, 2024</td>
+<td class="px-4 py-5 text-on-surface-variant font-medium">Modular Nutrition</td>
+<td class="px-4 py-5 font-headline font-bold text-base">$450.00</td>
+<td class="px-4 py-5">
+<span class="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-xs font-bold">Sent</span>
+</td>
+<td class="px-4 py-5 text-right last:rounded-r-xl">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-secondary hover:text-primary transition-colors border border-outline-variant/15 rounded-lg">
+<span class="material-symbols-outlined text-sm">download</span>
+</button>
+<button class="p-2 text-secondary hover:text-primary transition-colors border border-outline-variant/15 rounded-lg">
+<span class="material-symbols-outlined text-sm">forward_to_inbox</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-surface-container-low transition-colors rounded-xl">
+<td class="px-4 py-5 font-bold text-on-surface-variant first:rounded-l-xl">#INV-0889</td>
+<td class="px-4 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-container overflow-hidden">
+<img alt="Athlete Avatar" data-alt="professional portrait of a middle-aged marathon runner with a determined expression in soft daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVTqG1OvNQ2So6QmizkGHpgL2XEEHjw4s7JVtcEa1ARN4duSWDR_nIzrBVcL0-X4mDUBQ6F34Qsi9LqYk23jalfndb_4bCtJFADhyEhwnp8LMSUGIPY28dnfdaa1w15oeQaTtzkZt-8F8rnX0D0Pfr0SiMo8g4mAVdb8gjmWoErvXquEGuDqORNi7XsPRRoUPRVJgUwkrLODWLuHdGFrWliWpfZyQ4qQVXLAJV1DMgT60sKWCCfiw08e40YAY-Q1hx8n9Kzih-aIy5"/>
+</div>
+<span class="font-bold">Ben Thompson</span>
+</div>
+</td>
+<td class="px-4 py-5 text-secondary">Oct 05, 2024</td>
+<td class="px-4 py-5 text-on-surface-variant font-medium">Powerlifting Pro</td>
+<td class="px-4 py-5 font-headline font-bold text-base">$350.00</td>
+<td class="px-4 py-5">
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full text-xs font-bold">Paid</span>
+</td>
+<td class="px-4 py-5 text-right last:rounded-r-xl">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-secondary hover:text-primary transition-colors border border-outline-variant/15 rounded-lg">
+<span class="material-symbols-outlined text-sm">download</span>
+</button>
+<button class="p-2 text-secondary hover:text-primary transition-colors border border-outline-variant/15 rounded-lg">
+<span class="material-symbols-outlined text-sm">forward_to_inbox</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-8 pt-8 border-t border-outline-variant/5 flex justify-between items-center">
+<p class="text-xs text-secondary font-medium">Showing 4 of 128 invoices</p>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-low text-on-surface text-xs font-bold rounded-lg hover:bg-surface-container transition-colors">Previous</button>
+<button class="px-4 py-2 bg-surface-container-low text-on-surface text-xs font-bold rounded-lg hover:bg-surface-container transition-colors">Next</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Floating Glass Footer Status (Contextual) -->
+<footer class="mt-auto px-10 py-4 flex justify-between items-center text-[10px] text-secondary/60 uppercase tracking-[0.2em] font-medium">
+<span>Systems Online • AWS East-1</span>
+<span>v2.4.0 High-Performance Stable</span>
+</footer>
+</main>
+</body></html>

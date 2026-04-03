@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Athletes | CoachApp Executive Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#e2e2e5",
+              "outline-variant": "#c1c6d7",
+              "on-surface": "#1a1c1e",
+              "primary-container": "#206df1",
+              "on-surface-variant": "#414755",
+              "surface-variant": "#e2e2e5",
+              "surface-bright": "#f9f9fc",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#00419e",
+              "inverse-on-surface": "#f0f0f3",
+              "secondary-fixed": "#d7e2ff",
+              "on-tertiary-fixed": "#00201d",
+              "surface-dim": "#dadadc",
+              "on-secondary-container": "#505f7f",
+              "secondary": "#4f5e7e",
+              "error-container": "#ffdad6",
+              "tertiary": "#00685f",
+              "surface-container-low": "#f3f3f6",
+              "surface-tint": "#0057ce",
+              "on-primary-container": "#fefcff",
+              "on-error-container": "#93000a",
+              "error": "#ba1a1a",
+              "surface": "#f9f9fc",
+              "primary": "#0055c9",
+              "on-tertiary-container": "#f4fffc",
+              "inverse-primary": "#b1c5ff",
+              "surface-container": "#eeeef0",
+              "surface-container-high": "#e8e8ea",
+              "primary-fixed-dim": "#b1c5ff",
+              "on-tertiary": "#ffffff",
+              "outline": "#717786",
+              "on-secondary": "#ffffff",
+              "inverse-surface": "#2f3133",
+              "on-secondary-fixed": "#091b37",
+              "on-background": "#1a1c1e",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed-dim": "#b7c7eb",
+              "primary-fixed": "#dae2ff",
+              "on-primary": "#ffffff",
+              "tertiary-fixed-dim": "#2addcd",
+              "secondary-container": "#cadaff",
+              "on-tertiary-fixed-variant": "#005049",
+              "on-primary-fixed": "#001946",
+              "background": "#f9f9fc",
+              "tertiary-container": "#008379",
+              "on-secondary-fixed-variant": "#374765",
+              "tertiary-fixed": "#57fae9"
+            },
+            fontFamily: {
+              "headline": ["Public Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-sidebar {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .gradient-primary {
+        background: linear-gradient(135deg, #0055c9 0%, #206df1 100%);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<div class="flex min-h-screen">
+<!-- SideNavBar (Shared Component Blueprint) -->
+<aside class="h-screen sticky left-0 top-0 w-64 glass-sidebar flex flex-col gap-2 p-4 z-50">
+<div class="px-4 py-8 mb-4">
+<h2 class="font-headline font-black text-2xl text-primary tracking-tight">CoachApp</h2>
+<p class="text-xs text-secondary mt-1 font-medium tracking-wide uppercase">Executive Precision</p>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<!-- Active State: Athletes (Manual Semantic Mapping) -->
+<a class="flex items-center gap-4 px-4 py-3 bg-primary-fixed-dim text-primary rounded-full transition-all duration-200 cubic-bezier(0.4,0,0.2,1)" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-medium">Athletes</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="fact_check">fact_check</span>
+<span class="font-medium">Check-ins</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+<span class="font-medium">Calls</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-medium">Products</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-medium">Contracts</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-medium">Invoices</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/10">
+<a class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+<div class="flex items-center gap-3 px-4 py-6 mt-2">
+<img alt="Coach Profile" class="w-10 h-10 rounded-full object-cover" data-alt="Professional portrait of a male athletic coach in his 40s, sharp features, neutral lighting, professional studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhG1n14z-e0Ha_yOwNj73kXjbSmvd8mXcvjYNb3_6BxNEJVrz7i5hefuCbhiflVTgGOmAfNTMrzn3iRbnsJppIIcE-K-apeQFC4u8jW1TGO8_j3XvNfEkFZlhgBr0gpm-mkDB00Ws7jeojQGyFfIZr-rBbVaxecTXGvbRxDu2VgzbM9KjD4PzxtKZ5_H1Z4PbVhgEvHdcmFOpKAYy3nHV76ZpOz27YTTKf5DWaKZsxWBH4a_ctLJzEjAsP4CBzlG0Yg0qetymPTlZu"/>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-on-surface">Alex Rivera</span>
+<span class="text-xs text-secondary">Head Coach</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 min-w-0 bg-surface-container-low overflow-y-auto">
+<!-- Top Header Section (Editorial) -->
+<header class="pt-16 pb-12 px-12 flex justify-between items-end">
+<div class="max-w-2xl">
+<h1 class="font-headline font-bold text-5xl text-on-background tracking-tighter leading-none mb-4">
+                    Athletes
+                </h1>
+<p class="text-lg text-secondary font-body leading-relaxed">
+                    Overseeing 128 athletes across 4 disciplines
+                </p>
+</div>
+<div class="flex items-center gap-4">
+<button class="gradient-primary text-on-primary font-medium px-6 py-3 rounded-xl flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-xl" data-icon="add">add</span>
+                    Add New Athlete
+                </button>
+</div>
+</header>
+<!-- Content Section -->
+<section class="px-12 pb-16">
+<!-- Table Container (Bento/Modern List Style) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_20px_40px_rgba(26,28,30,0.04)] overflow-hidden">
+<!-- Search & Filters -->
+<div class="p-8 flex justify-between items-center bg-white">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary/20 transition-all text-sm font-medium" placeholder="Search athletes by name or sport..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-sm font-medium text-secondary hover:bg-surface-container-low rounded-lg transition-colors border border-outline-variant/15">
+                            Filter: All Disciplines
+                        </button>
+<button class="px-4 py-2 text-sm font-medium text-secondary hover:bg-surface-container-low rounded-lg transition-colors border border-outline-variant/15">
+                            Sort: Recently Active
+                        </button>
+</div>
+</div>
+<!-- Athletes List Layout (No Lines Principle) -->
+<div class="px-8 pb-8 flex flex-col gap-1">
+<!-- Column Headers -->
+<div class="grid grid-cols-12 px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-outline">
+<div class="col-span-4">Athlete</div>
+<div class="col-span-2">Sport</div>
+<div class="col-span-3">Goal Progress</div>
+<div class="col-span-2">Last Check-in</div>
+<div class="col-span-1 text-right">Status</div>
+</div>
+<!-- Athlete Row 1 -->
+<div class="grid grid-cols-12 items-center px-4 py-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<img alt="Athlete Avatar" class="w-12 h-12 rounded-full object-cover ring-2 ring-transparent group-hover:ring-primary/20 transition-all" data-alt="Close-up of a focused athletic woman in her 20s, natural sunlight, soft bokeh background, high-end fitness photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUXIMQdIvVpWfUG8MniuQWn1s6nBRS4-He-4xvpf388W3vowmhXaz8T18r7MREWUbJjBVb7xXIu9t3zqVfzY_EadlhHNRnQYbaQclXXDZfA8kksI-Fv_YGz11mGD2C338sYuxSqhJMEFGxjdPm6pa0U6Fiun6PlaNtRw5u-2RUDWNy0vTIwr-_Pa0z2RjJDPuwrYoIy3C2_O_r4FGEaQzEm8Zt48FUmM-OWhs6EnomzY-JRKwwzKyfhLx2pm5glKCcl1hc36nq5jen"/>
+<div>
+<h4 class="font-bold text-on-surface">Elena Vance</h4>
+<p class="text-xs text-secondary">Advanced Program • 24m</p>
+</div>
+</div>
+<div class="col-span-2">
+<span class="text-sm font-medium text-on-surface-variant">Powerlifting</span>
+</div>
+<div class="col-span-3 pr-8">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-[10px] font-bold text-tertiary">
+<span>-5.2kg WEIGHT LOSS</span>
+<span>84%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 84%"></div>
+</div>
+</div>
+</div>
+<div class="col-span-2 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="text-sm font-medium text-on-surface-variant">Today, 08:30 AM</span>
+</div>
+<div class="col-span-1 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl" data-icon="chat_bubble">chat_bubble</span></button>
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl" data-icon="visibility">visibility</span></button>
+</div>
+</div>
+<!-- Athlete Row 2 -->
+<div class="grid grid-cols-12 items-center px-4 py-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<img alt="Athlete Avatar" class="w-12 h-12 rounded-full object-cover ring-2 ring-transparent group-hover:ring-primary/20 transition-all" data-alt="Professional headshot of a fit man in his 30s, dramatic side lighting, athletic gear, professional fitness portfolio style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC39jGbKzp6ASq_mAe_08YOGV6c3FuoIedrLr6a-KAKEtm_AOQcwkaxvtdvoadbmrLOiqyvdWZ1xcJ8gYTrRUyI43Pb2jTx3OnNhhkQiaKyHdvdQgcbT7oBfI1g59NpVJct13ivF1Q7Z5Umo9AaOFv2kmrxbKN8KwPM8TLenb0OtIoa-3iuUJ4NiIyQGiK4hSmvNbva6umZ8Hi4Y46PCsm0x3qCw72xYhtGhKiNSm_hkF2TKsINOCdECxXo4x241e9TlqFam22GBIfS"/>
+<div>
+<h4 class="font-bold text-on-surface">Marcus Thorne</h4>
+<p class="text-xs text-secondary">Elite Program • 31m</p>
+</div>
+</div>
+<div class="col-span-2">
+<span class="text-sm font-medium text-on-surface-variant">Bodybuilding</span>
+</div>
+<div class="col-span-3 pr-8">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-[10px] font-bold text-tertiary">
+<span>HYPERTROPHY PHASE</span>
+<span>62%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 62%"></div>
+</div>
+</div>
+</div>
+<div class="col-span-2 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-amber-400"></div>
+<span class="text-sm font-medium text-on-surface-variant">Oct 12, 2023</span>
+</div>
+<div class="col-span-1 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl" data-icon="chat_bubble">chat_bubble</span></button>
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl" data-icon="visibility">visibility</span></button>
+</div>
+</div>
+<!-- Athlete Row 3 -->
+<div class="grid grid-cols-12 items-center px-4 py-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<img alt="Athlete Avatar" class="w-12 h-12 rounded-full object-cover ring-2 ring-transparent group-hover:ring-primary/20 transition-all" data-alt="Close-up of a runner's face, sweat glistening, bright daylight, outdoor track setting, high energy athletic mood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBedqXAyAvzce1yS7a59Nl63Iu-rta3YwPd6WfjSKhz9RJuVV6IjaoGV7PJPAhBQiqowwZA7bViwKi9zhDIkRF0OTbnIuaa-kfRTrQQdgaPnEMr-zemrerLjVA2EE-8-Ane6l4l-D9Mv_82ORgMGG2sc4wYFyL-rBeoEnrPxBSVVpLR--eJs2040x_LlyahLBGduaG_ojv0q4BhOj7cPAwzXoJowekIOa5hvczLL6M19sJchWCFB5P38WMOVyGdzbUP5dEw7wjwUtT6"/>
+<div>
+<h4 class="font-bold text-on-surface">Sarah Jenkins</h4>
+<p class="text-xs text-secondary">Performance Plan • 28f</p>
+</div>
+</div>
+<div class="col-span-2">
+<span class="text-sm font-medium text-on-surface-variant">Endurance</span>
+</div>
+<div class="col-span-3 pr-8">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-[10px] font-bold text-tertiary">
+<span>MARATHON PREP</span>
+<span>45%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 45%"></div>
+</div>
+</div>
+</div>
+<div class="col-span-2 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="text-sm font-medium text-on-surface-variant">Yesterday, 11:45 PM</span>
+</div>
+<div class="col-span-1 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl" data-icon="chat_bubble">chat_bubble</span></button>
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl" data-icon="visibility">visibility</span></button>
+</div>
+</div>
+<!-- Athlete Row 4 -->
+<div class="grid grid-cols-12 items-center px-4 py-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">
+                                JD
+                            </div>
+<div>
+<h4 class="font-bold text-on-surface">Julian Drake</h4>
+<p class="text-xs text-secondary">Basics Program • 19m</p>
+</div>
+</div>
+<div class="col-span-2">
+<span class="text-sm font-medium text-on-surface-variant">Powerlifting</span>
+</div>
+<div class="col-span-3 pr-8">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-[10px] font-bold text-tertiary">
+<span>STRENGTH PEAK</span>
+<span>12%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 12%"></div>
+</div>
+</div>
+</div>
+<div class="col-span-2 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-slate-300"></div>
+<span class="text-sm font-medium text-secondary">Awaiting First Log</span>
+</div>
+<div class="col-span-1 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl" data-icon="chat_bubble">chat_bubble</span></button>
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl" data-icon="visibility">visibility</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Dashboard Stats Grid -->
+<div class="grid grid-cols-3 gap-8 mt-12">
+<div class="bg-white p-8 rounded-xl flex flex-col gap-4 shadow-sm">
+<span class="text-[10px] font-bold uppercase tracking-widest text-outline">Engagement Rate</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline font-bold text-on-background">94.2%</span>
+<span class="text-sm text-tertiary font-bold">+2.4%</span>
+</div>
+<div class="h-12 w-full flex items-end gap-1">
+<div class="flex-1 bg-surface-container h-[40%] rounded-sm"></div>
+<div class="flex-1 bg-surface-container h-[60%] rounded-sm"></div>
+<div class="flex-1 bg-surface-container h-[55%] rounded-sm"></div>
+<div class="flex-1 bg-surface-container h-[75%] rounded-sm"></div>
+<div class="flex-1 bg-surface-container h-[90%] rounded-sm"></div>
+<div class="flex-1 bg-primary h-[95%] rounded-sm"></div>
+</div>
+</div>
+<div class="bg-white p-8 rounded-xl flex flex-col gap-4 shadow-sm">
+<span class="text-[10px] font-bold uppercase tracking-widest text-outline">Check-ins Pending</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline font-bold text-on-background">18</span>
+<span class="text-sm text-secondary font-medium">Due by EOD</span>
+</div>
+<div class="flex -space-x-3 overflow-hidden mt-4">
+<img alt="" class="inline-block h-8 w-8 rounded-full ring-2 ring-white" data-alt="Small round avatar of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4yrJp5ibMVHtT64A8ypU0Fap-cbqtAi4YtLEPtbbHKKxj4gvT-qfxqRAQGKPBivmdi5tsfSmXdeNYuKLSc76d4LetBFm-I8SBMb2bBw9vOtUOVsxxAlispSUVfqHNDuE3hCGkhbuYc_r0SlXJTuG0trtxMKRLdUsIHyCyksjOxelivcLqrOsFpAxcO2FYcBwfbGrHwR1nd38GWfhij7-skW9Mc4v-AKLMuCZZ-Mk_lRm7VuT81dckk9uGKrx84uhnLyuGJBLgFPd6"/>
+<img alt="" class="inline-block h-8 w-8 rounded-full ring-2 ring-white" data-alt="Small round avatar of a man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU25L3SfpOsZe1_mECN9UU-W4ZQ74FDQNcmp8lGIAFftj3DfgXu2GGhMJF2dNfHLzs9uGKldW6QKKyz8d5mCBZtSmsMstFb-PsLVTPOJxsC-CcPwpECdgMmToig6ApK5BQ8c8Wpmh2xJHsB0x0Ar5obAtUmrVueuyd8SjioyoljxiEwA2b_3wu90mkkHFtFqkSYkGM3ltX1pTxTUcAqS77yJsuM3pzYlToybU__O8cv6qQLel-nwV9vZl7YixuMfmDdniT5bJUMX98"/>
+<img alt="" class="inline-block h-8 w-8 rounded-full ring-2 ring-white" data-alt="Small round avatar of a runner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTRdcssvlt9srUjwhW8sXiFVFvTmJzwvEx0G_R9hpJRPgkhz6GDa7LsMZ1Xta5tXJfN_u04OGzIlO_hvjrzt4_K_u80eBRlHEp9tN5-GdnglKNhMMY_ju045jCeL3QmlcxJDf0OVcOnQElK7VDZA_fiMhgAr5jOgZqz07YNDnMcbcfHeTHDk2rzrvATjbJ7LFSFvtU2gcyoOZ-jR25B1dyVjo55bQynP8HGn1ybe9h6pJQSTkA6WjP6MpF3-U4QD5tk9O6S6tLKopZ"/>
+<div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-surface-container-high flex items-center justify-center text-[10px] font-bold">+15</div>
+</div>
+</div>
+<div class="bg-primary p-8 rounded-xl flex flex-col gap-4 shadow-xl shadow-primary/10">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-primary/60">Program Health</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline font-bold text-on-primary">Excellent</span>
+</div>
+<p class="text-xs text-on-primary/80 leading-relaxed">
+                        98% of your athletes have logged training volume within their target RPE range this week.
+                    </p>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0055c9",
+            "surface-bright": "#f9f9fc",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#d7e2ff",
+            "primary-fixed": "#dae2ff",
+            "on-secondary-container": "#505f7f",
+            "on-error": "#ffffff",
+            "inverse-surface": "#2f3133",
+            "tertiary-fixed": "#57fae9",
+            "on-secondary-fixed-variant": "#374765",
+            "surface-container-high": "#e8e8ea",
+            "on-secondary-fixed": "#091b37",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f3f3f6",
+            "secondary-container": "#cadaff",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed": "#001946",
+            "error": "#ba1a1a",
+            "secondary-fixed-dim": "#b7c7eb",
+            "on-primary-fixed-variant": "#00419e",
+            "surface": "#f9f9fc",
+            "on-background": "#1a1c1e",
+            "background": "#f9f9fc",
+            "outline": "#717786",
+            "tertiary-fixed-dim": "#2addcd",
+            "on-primary-container": "#fefcff",
+            "on-surface-variant": "#414755",
+            "primary-container": "#206df1",
+            "outline-variant": "#c1c6d7",
+            "primary-fixed-dim": "#b1c5ff",
+            "on-tertiary-fixed-variant": "#005049",
+            "tertiary": "#00685f",
+            "surface-variant": "#e2e2e5",
+            "on-tertiary-container": "#f4fffc",
+            "on-tertiary": "#ffffff",
+            "surface-dim": "#dadadc",
+            "on-tertiary-fixed": "#00201d",
+            "on-error-container": "#93000a",
+            "tertiary-container": "#008379",
+            "secondary": "#4f5e7e",
+            "inverse-on-surface": "#f0f0f3",
+            "surface-container-highest": "#e2e2e5",
+            "surface-container": "#eeeef0",
+            "on-surface": "#1a1c1e",
+            "inverse-primary": "#b1c5ff",
+            "surface-tint": "#0057ce",
+            "on-secondary": "#ffffff"
+          },
+          fontFamily: {
+            "headline": ["Public Sans"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .glass-sidebar {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #0055c9 0%, #206df1 100%);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c1c6d726;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="bg-surface font-body text-on-background antialiased custom-scrollbar">
+<!-- SideNavBar Anchor -->
+<aside class="fixed left-0 top-0 h-screen w-64 glass-sidebar z-50 flex flex-col py-8 shadow-[0_20px_40px_rgba(26,28,30,0.06)]">
+<div class="px-8 mb-12 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<h1 class="font-headline font-black text-primary leading-none text-xl">Ascent</h1>
+<p class="text-[10px] uppercase tracking-widest text-secondary font-bold">Professional</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Overview Tab -->
+<a class="flex items-center gap-4 text-[#4f5e7e] mx-4 py-3 px-6 hover:bg-[#f3f3f6] rounded-full transition-all group active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Overview</span>
+</a>
+<!-- Athletes Tab (Active) -->
+<a class="flex items-center gap-4 bg-[#b1c5ff] text-[#0055c9] rounded-full mx-4 py-3 px-6 font-bold shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-medium">Athletes</span>
+</a>
+<a class="flex items-center gap-4 text-[#4f5e7e] mx-4 py-3 px-6 hover:bg-[#f3f3f6] rounded-full transition-all group active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="font-medium">Programs</span>
+</a>
+<a class="flex items-center gap-4 text-[#4f5e7e] mx-4 py-3 px-6 hover:bg-[#f3f3f6] rounded-full transition-all group active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-medium">Messages</span>
+</a>
+<a class="flex items-center gap-4 text-[#4f5e7e] mx-4 py-3 px-6 hover:bg-[#f3f3f6] rounded-full transition-all group active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-medium">Library</span>
+</a>
+</nav>
+<div class="mt-auto px-4 space-y-2">
+<button class="w-full hero-gradient text-white py-4 px-6 rounded-full font-bold text-sm shadow-lg shadow-primary/20 flex items-center justify-center gap-2 mb-6 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+        New Session
+      </button>
+<a class="flex items-center gap-4 text-[#4f5e7e] py-3 px-6 hover:bg-[#f3f3f6] rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="text-sm">Support</span>
+</a>
+<a class="flex items-center gap-4 text-[#4f5e7e] py-3 px-6 hover:bg-[#f3f3f6] rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen p-12 max-w-7xl mx-auto">
+<!-- Header Hero Section -->
+<header class="flex flex-col md:flex-row items-center justify-between mb-16 gap-8">
+<div class="flex items-center gap-8 flex-1">
+<div class="relative group">
+<div class="absolute -inset-1 hero-gradient rounded-full blur opacity-25"></div>
+<img alt="Marcus Thorne Profile" class="relative w-32 h-32 rounded-full object-cover" data-alt="Close-up studio portrait of a athletic man with focused expression, soft cinematic lighting, neutral gray background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuBTD1rUv1MBFzjTfF86wOUb7ajL5rA1DJRb_vLYMqpMpXWdwLWIserDzlAhA0kLOH2vWJq27IUZZaAvA44e2qo_adAsJz-BweMqQx-58Uf34_fOzg-oHF_a9qeClSyYBuYn4sdC8p-sHS4ZBlIqVc20pYnTA6E6UWqKYkB8UAzM9MTPZjHlKOny83MQxiimwD4ptsU5pE7T4-wgenBCXFXTlGDMMlWo3lXYMk-nqM2IX8yNMvyYImZKYXDZNUMQCHd7V8dIfFHGFT"/>
+</div>
+<div>
+<h1 class="font-headline text-6xl font-extrabold tracking-tighter text-on-background leading-none">Marcus Thorne</h1>
+<p class="text-secondary mt-2 flex items-center gap-2 font-medium">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
+            Elite Tier • Chicago, IL
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-12">
+<div class="flex flex-col items-center">
+<div class="relative w-24 h-24 flex items-center justify-center">
+<svg class="absolute w-full h-full -rotate-90">
+<circle class="text-surface-container-high" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-tertiary transition-all duration-1000 ease-out" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" stroke-dasharray="264" stroke-dashoffset="31" stroke-width="8"></circle>
+</svg>
+<span class="font-headline text-2xl font-bold text-tertiary">88%</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary mt-2">Momentum Score</span>
+</div>
+<div class="flex flex-col gap-3">
+<button class="hero-gradient text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-primary/20 hover:opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">send</span>
+            Message Marcus
+          </button>
+<button class="bg-surface-container-lowest text-primary px-8 py-3 rounded-full font-bold border border-outline-variant/15 hover:bg-surface-container-low transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+            Schedule Call
+          </button>
+</div>
+</div>
+</header>
+<!-- Metrics Grid -->
+<section class="bg-surface-container-low rounded-xl p-8 mb-12">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
+<span class="text-secondary text-xs font-bold uppercase tracking-widest block mb-4">Current Phase</span>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed-dim/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">layers</span>
+</div>
+<p class="font-headline font-bold text-lg">Hypertrophy Block 2</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
+<span class="text-secondary text-xs font-bold uppercase tracking-widest block mb-2">Goal Completion</span>
+<div class="flex items-end justify-between mb-2">
+<p class="font-headline font-bold text-2xl text-primary">72%</p>
+<span class="text-[10px] font-bold text-secondary">Target: 100%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 72%"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
+<span class="text-secondary text-xs font-bold uppercase tracking-widest block mb-4">Payment Status</span>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<p class="font-headline font-bold text-lg">Up to date</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
+<span class="text-secondary text-xs font-bold uppercase tracking-widest block mb-4">Compliance</span>
+<div class="flex items-center justify-between">
+<div class="flex items-baseline gap-1">
+<p class="font-headline font-black text-3xl">94</p>
+<span class="text-secondary font-bold text-sm">%</span>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-green-100 flex items-center justify-center text-[10px] font-bold text-green-700">M</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-green-100 flex items-center justify-center text-[10px] font-bold text-green-700">T</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-green-100 flex items-center justify-center text-[10px] font-bold text-green-700">W</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section Tabs -->
+<nav class="flex items-center gap-4 mb-12">
+<button class="bg-primary-fixed-dim text-on-primary-fixed-variant px-8 py-3 rounded-full font-bold transition-all shadow-sm">Overview</button>
+<button class="text-secondary px-8 py-3 rounded-full font-bold hover:bg-surface-container-low transition-all">Training Log</button>
+<button class="text-secondary px-8 py-3 rounded-full font-bold hover:bg-surface-container-low transition-all">Billing</button>
+<button class="text-secondary px-8 py-3 rounded-full font-bold hover:bg-surface-container-low transition-all">Documents</button>
+</nav>
+<!-- Overview Content (Symphonic Layout) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+<!-- Performance Narrative -->
+<div class="lg:col-span-2 space-y-8">
+<div>
+<h2 class="font-headline text-3xl font-extrabold tracking-tight mb-6">Performance Narrative</h2>
+<div class="prose prose-lg max-w-none">
+<p class="text-on-surface-variant font-body text-xl leading-relaxed mb-6">
+              Marcus has demonstrated exceptional <span class="text-primary font-bold">biomechanical adaptation</span> during the current Hypertrophy phase. His neurological efficiency in technical lifts, specifically the front squat and overhead press, has increased by 14% over the last microcycle.
+            </p>
+<p class="text-on-surface-variant font-body text-xl leading-relaxed">
+              We are seeing a consistent upward trend in his recovery markers. Sleep latency has decreased, and HR variability remains in the "Optimal" zone despite the increased volume. The transition to Block 3 will focus on maximal force production while maintaining the current metabolic headroom.
+            </p>
+</div>
+</div>
+<!-- Secondary Insights Bento -->
+<div class="grid grid-cols-2 gap-6 pt-4">
+<div class="bg-surface-container rounded-xl p-8">
+<h4 class="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4">Focus Area</h4>
+<p class="font-headline font-bold text-2xl">Posterior Chain Density</p>
+</div>
+<div class="bg-surface-container rounded-xl p-8">
+<h4 class="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4">Recovery Status</h4>
+<p class="font-headline font-bold text-2xl text-tertiary">Surplus Energy</p>
+</div>
+</div>
+</div>
+<!-- Personal Specs -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/15">
+<h3 class="font-headline text-xl font-bold mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+          Personal Specs
+        </h3>
+<div class="space-y-6">
+<div class="flex justify-between items-center group">
+<span class="text-secondary font-medium">Height</span>
+<span class="font-headline font-bold text-on-background">188 cm</span>
+</div>
+<div class="flex justify-between items-center group">
+<span class="text-secondary font-medium">Current Weight</span>
+<span class="font-headline font-bold text-on-background">94.2 kg</span>
+</div>
+<div class="flex justify-between items-center group">
+<span class="text-secondary font-medium">Target BF%</span>
+<span class="font-headline font-bold text-primary">10.5%</span>
+</div>
+<div class="flex justify-between items-center group">
+<span class="text-secondary font-medium">Lean Mass</span>
+<span class="font-headline font-bold text-on-background">82.1 kg</span>
+</div>
+<div class="flex justify-between items-center group border-t border-surface-container-high pt-6 mt-6">
+<span class="text-secondary font-medium">Resting HR</span>
+<span class="font-headline font-bold text-on-background">48 bpm</span>
+</div>
+<div class="flex justify-between items-center group">
+<span class="text-secondary font-medium">VO2 Max</span>
+<span class="font-headline font-bold text-on-background">58 ml/kg</span>
+</div>
+</div>
+<div class="mt-10 p-4 bg-surface-container-low rounded-lg text-center">
+<p class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-1">Last Sync</p>
+<p class="text-sm font-semibold text-on-background">Today, 06:45 AM</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Help Trigger (Subtle) -->
+<div class="fixed bottom-8 right-8 z-40">
+<button class="w-14 h-14 rounded-full bg-surface-container-highest text-secondary shadow-xl flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-all active:scale-90">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</body></html>

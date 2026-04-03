@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachApp - Calls Modal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Main Dashboard Placeholder -->
+        <header class="dashboard-header">
+            <div class="logo">CoachApp</div>
+            <div class="user-profile">
+                <button class="icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+                <div class="avatar-sm">M</div>
+                <span>Coach Michael</span>
+            </div>
+        </header>
+
+        <div class="app-shell">
+            <!-- Sidebar Navigation -->
+            <aside class="app-sidebar">
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" data-view="dashboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="nav-item" data-view="athletes">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <span>Athleten</span>
+                    </button>
+                    <button class="nav-item" data-view="checkins">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span>Check-Ins</span>
+                    </button>
+                    <button class="nav-item" id="openProductsView" data-view="products">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        <span>Produkte</span>
+                    </button>
+                    <button class="nav-item" data-view="calendar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        <span>Kalender</span>
+                    </button>
+                    <button class="nav-item" data-view="invoices">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                        <span>Rechnungen</span>
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="app-content scroll-y">
+                <!-- Dashboard View -->
+                <!-- [AGENT-1: DASHBOARD - START] -->
+                <section id="view-dashboard" class="content-view active">
+                    <div class="welcome-banner">
+                        <div class="banner-text">
+                            <h1>Guten Morgen, Michael!</h1>
+                            <p>Du hast heute 3 anstehende Calls und 5 offene Check-Ins.</p>
+                        </div>
+                        <button id="openModalBtn" class="btn btn-accent-vibrant">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-2.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                             Nächsten Call starten
+                        </button>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="card card-hero">
+                            <div class="card-header-simple">
+                                <h3>Heutige To-Dos</h3>
+                                <span class="count-badge">2</span>
+                            </div>
+                            <div class="list-container">
+                                <div class="todo-item" onclick="document.getElementById('openModalBtn').click()">
+                                    <div class="todo-info">
+                                        <span class="todo-name">Anna Müller</span>
+                                        <span class="todo-meta">Erstgespräch • 17:30</span>
+                                    </div>
+                                    <span class="tag tag-call">CALL</span>
+                                </div>
+                                <div class="todo-item">
+                                    <div class="todo-info">
+                                        <span class="todo-name">Lukas Schmidt</span>
+                                        <span class="todo-meta">Onboarding • 18:45</span>
+                                    </div>
+                                    <span class="tag tag-onboard">ONBOARD</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card card-hero">
+                            <div class="card-header-simple">
+                                <h3>Offene Check-Ins</h3>
+                                <span class="count-badge">3</span>
+                            </div>
+                            <div class="list-container">
+                                <div class="todo-item">
+                                    <div class="todo-info">
+                                        <span class="todo-name">Julia Weber</span>
+                                        <span class="todo-meta">Weekly Check-In</span>
+                                    </div>
+                                    <span class="tag tag-urgent">OFFEN</span>
+                                </div>
+                                <div class="todo-item">
+                                    <div class="todo-info">
+                                        <span class="todo-name">Tom Bauer</span>
+                                        <span class="todo-meta">Form-Check</span>
+                                    </div>
+                                    <span class="tag tag-warning">REVIEW</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- [AGENT-1: DASHBOARD - END] -->
+
+                <!-- [AGENT-2: ATHLETES - START] -->
+                <section id="view-athletes" class="content-view">
+                    <header class="view-header">
+                        <h1>Meine Athleten</h1>
+                        <button class="btn btn-primary">+ Neuer Athlet</button>
+                    </header>
+                    <div class="card content-placeholder">
+                        <p>Athleten-Verzeichnis wird geladen...</p>
+                    </div>
+                </section>
+                <!-- [AGENT-2: ATHLETES - END] -->
+
+                <!-- [AGENT-3: CHECKINS - START] -->
+                <section id="view-checkins" class="content-view">
+                    <header class="view-header">
+                        <h1>Check-Ins</h1>
+                    </header>
+                    <div class="card content-placeholder">
+                        <p>Aktuelle Check-Ins werden geladen...</p>
+                    </div>
+                </section>
+                <!-- [AGENT-3: CHECKINS - END] -->
+
+                <!-- [AGENT-4: INVOICES - START] -->
+                <section id="view-invoices" class="content-view">
+                    <header class="view-header">
+                        <h1>Rechnungen & Finanzen</h1>
+                    </header>
+                    <div class="card content-placeholder">
+                        <p>Finanz-Übersicht wird geladen...</p>
+                    </div>
+                </section>
+                <!-- [AGENT-4: INVOICES - END] -->
+            </main>
+        </div>
+
+        <!-- The Calls Modal -->
+        <div id="callsModal" class="modal-overlay hidden">
+            <div class="modal-container dark-theme">
+                <main class="modal-main">
+                    <!-- Modal Header -->
+                    <header class="modal-header">
+                        <div class="athlete-info">
+                            <div class="avatar-placeholder">A</div>
+                            <div class="info-text">
+                                <h1 id="athleteName">Anna Müller</h1>
+                                <p class="meta">anna@test.de • Fitness</p>
+                            </div>
+                        </div>
+                        <div class="header-actions">
+                            <button class="icon-btn edit-notes-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                            </button>
+                            <div class="timer-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                <span id="callTimer">30:00 / 30 Min.</span>
+                            </div>
+                            <button id="callActionBtn" class="btn-call-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                                Call Starten
+                            </button>
+                            <button id="closeModalBtn" class="icon-btn close-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </button>
+                        </div>
+                    </header>
+
+                    <!-- Content Navigation -->
+                    <nav class="content-nav">
+                        <button class="nav-btn active" data-tab="ziele">Ziele</button>
+                        <button class="nav-btn" data-tab="coaching">Coaching</button>
+                        <button class="nav-btn" data-tab="vereinbarung">Vereinbarung</button>
+                    </nav>
+
+                    <div class="modal-split-view">
+                        <!-- Left Sidebar: Stammdaten -->
+                        <aside class="modal-sidebar">
+                            <div class="sidebar-section">
+                                <div class="section-title">
+                                    <h3>Stammdaten</h3>
+                                    <button class="text-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                    </button>
+                                </div>
+                                <div class="data-group">
+                                    <label>Geburtsdatum</label>
+                                    <p>01.01.1990 (Alter: 34)</p>
+                                </div>
+                                <div class="data-group">
+                                    <label>Adresse</label>
+                                    <p>Musterstraße 1, Berlin</p>
+                                </div>
+                                <div class="data-group">
+                                    <label>Email</label>
+                                    <p>anna@test.de</p>
+                                </div>
+                                <div class="data-group">
+                                    <label>Tel</label>
+                                    <p>+49 123 4567</p>
+                                </div>
+                                <div class="data-group">
+                                    <label>Paket / Start</label>
+                                    <p>Pro-Plan</p>
+                                </div>
+                                <div class="data-group important">
+                                    <label>Besonderheiten</label>
+                                    <p class="highlight-urgent">Verletzung Schulter links</p>
+                                </div>
+                            </div>
+                        </aside>
+
+                        <!-- Main Content Area (Mask) -->
+                        <section class="modal-mask" id="callMaskContent">
+                            <!-- Default: Erstgespräch / Ziele -->
+                            <div id="tab-ziele" class="tab-pane active">
+                                <div class="mask-center-content">
+                                    <div class="goal-card-large">
+                                        <div class="card-header">
+                                            <input type="text" placeholder="Name des Ziels" class="invisible-input">
+                                            <button class="delete-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="scope-row">
+                                                <label>Scope:</label>
+                                                <select class="select-dark-sm"><option>Training</option><option>Ernährung</option><option>Gesundheit</option></select>
+                                            </div>
+                                            <div class="progress-wrap">
+                                                <input type="range" min="0" max="100" value="40" class="mini-slider">
+                                                <span class="progress-label">40%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="add-btn-main">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="tab-coaching" class="tab-pane">
+                                <div class="mask-center-content">
+                                    <div class="presentation-list">
+                                        <div class="pres-card-horizontal">
+                                            <div class="pres-icon blue-bg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2z"/><circle cx="12" cy="12" r="3"/><path d="M17 9l4-4M7 9l-4-4M17 15l4 4M7 15l-4 4"/></svg>
+                                            </div>
+                                            <div class="pres-info">
+                                                <h4>Über Mich</h4>
+                                                <p>Ich stelle mich vor</p>
+                                            </div>
+                                            <button class="delete-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                                        </div>
+                                        <div class="pres-card-horizontal">
+                                            <div class="pres-icon blue-bg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.7 6.7l10.6 10.6M18.8 5.2a1.5 1.5 0 0 0-2.1 0l-1.5 1.5M6.7 6.7L5.2 8.2a1.5 1.5 0 0 0 0 2.1l1.5 1.5M17.3 17.3l1.5-1.5a1.5 1.5 0 0 0 0-2.1l-1.5-1.5M6.7 6.7l-1.5-1.5a1.5 1.5 0 0 1 0-2.1l1.5-1.5M17.3 17.3l1.5 1.5a1.5 1.5 0 0 1 0 2.1l-1.5 1.5"/></svg>
+                                            </div>
+                                            <div class="pres-info">
+                                                <h4>Fitness-Coaching</h4>
+                                                <p>Wie kann ich dich unterstützen und wie läuft das Coaching ab?</p>
+                                            </div>
+                                            <button class="delete-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                                        </div>
+                                        <div class="pres-card-horizontal">
+                                            <div class="pres-icon blue-bg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                                            </div>
+                                            <div class="pres-info">
+                                                <h4>Pakete</h4>
+                                                <p>Ich stelle dir meine Leistungs-Pakete vor und erkläre dir, wie du selbst ein individuelles Coaching-Paket aus meinem Leistungsspektrum zusammenstellen kannst</p>
+                                            </div>
+                                            <button class="delete-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                                        </div>
+                                    </div>
+                                    <button class="add-btn-main">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="tab-vereinbarung" class="tab-pane">
+                                <div class="vereinbarung-form">
+                                    <section class="form-section">
+                                        <h4>Zeitraum</h4>
+                                        <div class="form-grid-3">
+                                            <div class="input-stacked">
+                                                <label>Start:</label>
+                                                <input type="text" class="input-dark">
+                                            </div>
+                                            <div class="input-stacked">
+                                                <label>Bis:</label>
+                                                <input type="text" class="input-dark">
+                                            </div>
+                                            <div class="input-stacked">
+                                                <label>Monate:</label>
+                                                <input type="text" class="input-dark">
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-1">
+                                            <label class="checkbox-inline"><input type="checkbox"> Monate wählen:</label>
+                                            <div class="picker-btn"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                                            <label class="checkbox-inline ml-2"><input type="checkbox"> offen</label>
+                                        </div>
+                                    </section>
+
+                                    <section class="form-section">
+                                        <h4>Spektrum</h4>
+                                        <div class="form-row gap-2">
+                                            <label class="checkbox-pill"><input type="checkbox"> Training</label>
+                                            <label class="checkbox-pill"><input type="checkbox"> Ernährung</label>
+                                            <label class="checkbox-pill"><input type="checkbox"> Gesundheit</label>
+                                        </div>
+                                        <div class="dual-columns mt-1">
+                                            <div class="col">
+                                                <label>Pakete:</label>
+                                                <div class="content-box"></div>
+                                            </div>
+                                            <div class="col">
+                                                <label>Leistungen:</label>
+                                                <div class="content-box"></div>
+                                            </div>
+                                        </div>
+                                        <div class="center-btn-row">
+                                            <button class="btn-purple-sm">Individuelle Leistung erstellen</button>
+                                        </div>
+                                    </section>
+
+                                    <section class="form-section">
+                                        <h4>Abschluss</h4>
+                                        <div class="form-grid-3">
+                                            <div class="input-stacked">
+                                                <label>Start:</label>
+                                                <input type="text" class="input-dark">
+                                            </div>
+                                            <div class="input-stacked">
+                                                <label>Ermäßigung:</label>
+                                                <div class="select-dark-wrap">
+                                                    <select class="select-dark"><option></option></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-1 center-content">
+                                            <label>Summe:</label>
+                                            <input type="text" class="input-dark w-100">
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </main>
+
+                <!-- Right Summary Column -->
+                <aside class="modal-summary">
+                    <div class="call-type-selector">
+                        <select>
+                            <option>Erstgespräch</option>
+                            <option>Review Call</option>
+                            <option>Onboarding</option>
+                        </select>
+                        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+
+                    <div class="summary-card">
+                        <h2>Zusammenfassung</h2>
+                        
+                        <div class="summary-section">
+                            <h4>Vereinbarung</h4>
+                            <div class="vereinbarung-row">
+                                <div class="date-input">
+                                    <input type="text" value="Start-Datum" readonly>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                </div>
+                                <label class="toggle-label"><input type="checkbox"> offen</label>
+                            </div>
+                        </div>
+
+                        <div class="summary-section">
+                            <h4>Ziele</h4>
+                            <ol class="summary-list">
+                                <li></li>
+                                <li></li>
+                            </ol>
+                        </div>
+
+                        <div class="summary-section">
+                            <h4>Leistungen</h4>
+                            <ol class="summary-list">
+                                <li></li>
+                                <li></li>
+                            </ol>
+                        </div>
+
+                        <div class="summary-section">
+                            <h4>Anhänge</h4>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" id="triggerAthleteApp"> AthleteApp</label>
+                                <div id="athleteAppCodeArea" class="code-display-box hidden">
+                                    <label>Aktivierungscode:</label>
+                                    <div class="code-row">
+                                        <code id="activationCodeDisplay">------</code>
+                                        <button class="btn-icon-sm" id="generateCodeBtn" title="Code generieren">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <label><input type="checkbox"> Onboarding</label>
+                                <div class="sub-checkboxes">
+                                    <label><input type="checkbox"> Basic</label>
+                                    <label><input type="checkbox"> Call</label>
+                                </div>
+                                <label><input type="checkbox"> Leistungen & Pakete</label>
+                                <label><input type="checkbox"> Gesprächsprotokoll</label>
+                                <label><input type="checkbox"> Follow-up Call</label>
+                            </div>
+                        </div>
+
+                        <div class="summary-footer">
+                           <label class="decline-label"><input type="checkbox"> <span>Angebot wurde abgelehnt</span></label>
+                        </div>
+                    </div>
+
+                    <button id="finishCallBtn" class="btn-finish-call">
+                        Call Abschließen & Speichern
+                    </button>
+                </aside>
+            </div>
+        </div>
+
+        <!-- The Products Modal -->
+        <div id="productsModal" class="modal-overlay hidden">
+            <div class="modal-container dark-theme products-modal-size">
+                <main class="modal-main">
+                    <!-- Modal Header -->
+                    <header class="modal-header">
+                        <div class="modal-title-area">
+                            <h1>Leistungsverzeichnis</h1>
+                            <p class="meta">Verwalte deine Angebote, Pakete und Leistungen</p>
+                        </div>
+                        <div class="header-actions">
+                            <div class="search-box-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                <input type="text" placeholder="Leistung suchen..." class="search-input">
+                            </div>
+                            <div class="dropdown-wrap">
+                                <button id="createNewProductBtn" class="btn btn-primary btn-with-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                    Neu Erstellen
+                                </button>
+                            </div>
+                            <button id="closeProductsModal" class="icon-btn close-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </button>
+                        </div>
+                    </header>
+
+                    <!-- Products Tabs -->
+                    <nav class="content-nav">
+                        <button class="nav-btn active" data-tab-products="leistungen">Leistungen</button>
+                        <button class="nav-btn" data-tab-products="pakete">Pakete & Angebote</button>
+                    </nav>
+
+                    <!-- Products Content -->
+                    <section class="modal-content-full scroll-y">
+                        <div id="products-tab-leistungen" class="products-tab-pane active">
+                            <table class="ascent-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Kategorie</th>
+                                        <th>Typ</th>
+                                        <th>Basispreis</th>
+                                        <th>Frequenz</th>
+                                        <th>Status</th>
+                                        <th class="actions-cell"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leistungenList">
+                                    <!-- Will be populated by JS -->
+                                    <tr>
+                                        <td>
+                                            <div class="product-name-cell">
+                                                <div class="product-icon teal">T</div>
+                                                <span>Personal Training (60m)</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge category-badge">Training</span></td>
+                                        <td>Leistung</td>
+                                        <td>85,00 €</td>
+                                        <td>Einmalig</td>
+                                        <td><span class="status-indicator active">Aktiv</span></td>
+                                        <td class="actions-cell">
+                                            <button class="icon-btn sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="product-name-cell">
+                                                <div class="product-icon orange">E</div>
+                                                <span>Ernährungsplan Basis</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge category-badge">Ernährung</span></td>
+                                        <td>Leistung</td>
+                                        <td>49,00 €</td>
+                                        <td>Einmalig</td>
+                                        <td><span class="status-indicator active">Aktiv</span></td>
+                                        <td class="actions-cell">
+                                            <button class="icon-btn sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="products-tab-pakete" class="products-tab-pane">
+                            <div class="packages-grid">
+                                <!-- Example Package Card -->
+                                <div class="package-card">
+                                    <div class="package-header">
+                                        <h3>Premium Coaching</h3>
+                                        <span class="badge price-badge">199 €/Mo</span>
+                                    </div>
+                                    <p class="package-desc">Das Rundum-Sorglos-Paket für ambitionierte Athleten.</p>
+                                    <ul class="package-features">
+                                        <li>4x Personal Training / Monat</li>
+                                        <li>Individueller Trainingsplan</li>
+                                        <li>Ernährungs-Coaching</li>
+                                        <li>24/7 Support</li>
+                                    </ul>
+                                    <div class="package-footer">
+                                        <span class="status-indicator active">Aktiv</span>
+                                        <div class="actions">
+                                            <button class="btn btn-secondary sm">Bearbeiten</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+
+        <!-- Product Edit Modal -->
+        <div id="productEditModal" class="modal-overlay hidden" style="z-index: 1100;">
+            <div class="modal-container dark-theme product-edit-size">
+                <header class="modal-header">
+                    <h2 id="productEditTitle">Leistung bearbeiten</h2>
+                    <button id="closeProductEditModal" class="icon-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </header>
+                <div class="modal-body p-2">
+                    <form id="productEditForm">
+                        <input type="hidden" id="editProductId">
+                        <div class="form-grid-2">
+                            <div class="input-stacked">
+                                <label>Name</label>
+                                <input type="text" id="editProductName" class="input-dark" required>
+                            </div>
+                            <div class="input-stacked">
+                                <label>Kategorie</label>
+                                <select id="editProductCategory" class="select-dark">
+                                    <option>Training</option>
+                                    <option>Ernährung</option>
+                                    <option>Gesundheit</option>
+                                    <option>Allgemein</option>
+                                </select>
+                            </div>
+                            <div class="input-stacked">
+                                <label>Typ</label>
+                                <select id="editProductType" class="select-dark">
+                                    <option value="Leistung">Leistung</option>
+                                    <option value="Paket">Paket</option>
+                                </select>
+                            </div>
+                            <div class="input-stacked">
+                                <label>Basispreis (€)</label>
+                                <input type="number" id="editProductPrice" class="input-dark" required>
+                            </div>
+                            <div class="input-stacked">
+                                <label>Frequenz</label>
+                                <select id="editProductFrequency" class="select-dark">
+                                    <option>Einmalig</option>
+                                    <option>Wöchentlich</option>
+                                    <option>Monatlich</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-stacked mt-2">
+                            <label>Beschreibung</label>
+                            <textarea id="editProductDesc" class="input-dark" rows="3"></textarea>
+                        </div>
+                        <div class="modal-footer mt-2">
+                            <button type="button" id="deleteProductBtn" class="btn btn-danger">Löschen</button>
+                            <div class="spacer"></div>
+                            <button type="submit" class="btn btn-primary">Speichern</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call Completion / Summary Overlay -->
+        <div id="finishOverlay" class="finish-overlay hidden">
+            <div class="overlay-card">
+                <h2>Call Zusammenfassung</h2>
+                <p>Nächste Schritte und automatisierte Prozesse:</p>
+                <div class="trigger-list">
+                    <label class="trigger-item"><input type="checkbox" checked> <span>ArtistApp Zugang senden</span></label>
+                    <label class="trigger-item"><input type="checkbox" checked> <span>Onboarding Basic vorschlagen</span></label>
+                    <label class="trigger-item"><input type="checkbox" checked> <span>Vereinbarung zur Unterschrift senden</span></label>
+                    <label class="trigger-item"><input type="checkbox" checked> <span>Gesprächsprotokoll erstellen</span></label>
+                </div>
+                <div class="overlay-footer">
+                    <button id="cancelFinishBtn" class="btn btn-secondary">Zurück</button>
+                    <button id="confirmFinishBtn" class="btn btn-primary">Prozesse starten</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
