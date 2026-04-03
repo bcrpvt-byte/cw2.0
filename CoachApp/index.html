@@ -141,13 +141,52 @@
                 </section>
                 <!-- [AGENT-3: CHECKINS - END] -->
 
-                <!-- [AGENT-4: INVOICES - START] -->
+                                <!-- [AGENT-4: INVOICES - START] -->
                 <section id="view-invoices" class="content-view">
                     <header class="view-header">
                         <h1>Rechnungen & Finanzen</h1>
+                        <button class="btn btn-primary" id="createNewInvoiceBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            Neue Rechnung
+                        </button>
                     </header>
-                    <div class="card content-placeholder">
-                        <p>Finanz-Übersicht wird geladen...</p>
+
+                    <div class="invoice-summary-cards">
+                        <div class="summary-card-inv">
+                            <h3>Umsatz (Mtd)</h3>
+                            <div class="value">4.250,00 €</div>
+                        </div>
+                        <div class="summary-card-inv">
+                            <h3>Offene Beträge</h3>
+                            <div class="value text-orange">850,00 €</div>
+                        </div>
+                        <div class="summary-card-inv">
+                            <h3>Überfällig</h3>
+                            <div class="value text-red">0,00 €</div>
+                        </div>
+                    </div>
+
+                    <div class="card p-0 mt-3">
+                        <div class="card-header p-3 border-bottom">
+                            <h2 class="m-0 text-md">Aktuelle Rechnungen</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="ascent-table invoice-table">
+                                <thead>
+                                    <tr>
+                                        <th>Rechnungs-Nr</th>
+                                        <th>Kunde</th>
+                                        <th>Datum</th>
+                                        <th>Betrag</th>
+                                        <th>Status</th>
+                                        <th class="actions-cell">Aktionen</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="invoicesTableBody">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
                 <!-- [AGENT-4: INVOICES - END] -->
